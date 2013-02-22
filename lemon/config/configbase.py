@@ -24,6 +24,7 @@ class ConfigBase(metaclass=ConfigType):
     aspects = {
         'application': (),
         'flow': (),
+        'session': (),
     }
     
     debug = False
@@ -85,3 +86,17 @@ class ConfigBase(metaclass=ConfigType):
     persistence = {}
     settings = {}
     urls = {}
+    
+    media = {
+        'url': '/media/',
+        'root': 'public/media',
+    }
+    
+    static = {
+        'url': '/static/',
+        'root': 'public/static',
+    }
+    
+    templates = {
+        'directory': 'templates',
+    }
