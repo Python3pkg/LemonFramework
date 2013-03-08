@@ -31,8 +31,9 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
     install_requires=[],
-    extras_require=[
-        'jinja2',
-        'wtforms',
-    ],
+    extras_require={
+        'mongodb':  ['pymongo'],
+        'jinja': ['jinja2'],
+        'forms': ['wtforms'],
+    },
 )
