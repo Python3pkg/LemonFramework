@@ -2,7 +2,7 @@ import os
 from setuptools import setup
 
 def read(filename):
-    with open(os.path.join(os.path.dirname(__file__), fname)) as f:
+    with open(os.path.join(os.path.dirname(__file__), filename)) as f:
         return f.read()
 
 setup(
@@ -30,7 +30,9 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: WSGI',
         'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
-    install_requires=[
-        'markdown',
+    install_requires=[],
+    extras_require=[
+        'jinja2',
+        'wtforms',
     ],
 )
