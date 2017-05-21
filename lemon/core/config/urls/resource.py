@@ -25,6 +25,7 @@ from lemon.core.config.exceptions import (URLBadFormedException,
     InvalidConfigException)
 from lemon.core.utils.imports import import_object
 from lemon.renders.exceptions import RenderParamsException
+import collections
 
 
 class Resource(metaclass=AspectType):
@@ -101,27 +102,27 @@ class Resource(metaclass=AspectType):
     def _set_controller(self, controller):
         if isinstance(controller, str):
             controller = import_object(controller)
-        if callable(controller):
+        if isinstance(controller, collections.Callable):
             controller = controller()
         
         self.controller = controller
     
     def _set_renders(self, renders):
         # Remove 'None' renders from this URL
-        for mimetype, render in renders.items():
+        for mimetype, render in list(renders.items()):
             if render is None:
                 self.renders.pop(render, None)
         # Update with not 'None' renders
         self.renders.update(
-            (mimetype, render) for mimetype, render in renders.items()
+            (mimetype, render) for mimetype, render in list(renders.items())
             if render is not None
         )
 
-        for mimetype, render in self.renders.items():
+        for mimetype, render in list(self.renders.items()):
             # Si es una cadema de texto, la importamos
             if isinstance(render, str):
                 render = import_object(render)
-            if callable(render):
+            if isinstance(render, collections.Callable):
                 render = render()
             self.renders[mimetype] = render
     
@@ -133,7 +134,7 @@ class Resource(metaclass=AspectType):
             if isinstance(context_processor, str):
                 context_processor = import_object(context_processor)
             # Forzamos a que sea invocable
-            if not callable(context_processor):
+            if not isinstance(context_processor, collections.Callable):
                 raise InvalidConfigException(
                     'Context processor is not callable'
                 )
@@ -246,7 +247,7 @@ class Resource(metaclass=AspectType):
         accepts = sorted(
             [
                 [key, request.accept[key]]
-                for key in request.accept.keys()
+                for key in list(request.accept.keys())
             ],
             key=lambda accept: accept[1],
             reverse=True

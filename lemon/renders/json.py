@@ -17,7 +17,7 @@ along with Lemon.  If not, see <http://www.gnu.org/licenses/>.
 
 Copyright (c) 2012 Vicente Ruiz <vruiz2.0@gmail.com>
 """
-import json
+from . import json
 
 from lemon.renders.base import Render
 

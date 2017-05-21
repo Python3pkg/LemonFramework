@@ -73,7 +73,7 @@ See http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.5,
 
 """
 import cgi
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from http.cookies import SimpleCookie
 
 from lemon.core.utils.decorators import cached_property

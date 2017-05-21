@@ -61,7 +61,7 @@ class ServingFilesAspect(Aspect):
         }
     
     def exception(self, exception, handler_obj, request, *args, **kwargs):
-        for url, base_path in self.paths.items():
+        for url, base_path in list(self.paths.items()):
             if request.path_info.startswith(url):
                 resource = request.path_info.replace(url, '', 1)
                 file_path = os.path.join(base_path, resource)

@@ -35,7 +35,7 @@ def load_urls(url_params):
 def _load_nested_urls(url_params, url_base):
     unordered_urls = []
 
-    for url, params in url_params.items():
+    for url, params in list(url_params.items()):
         if url.startswith('/'):
             # TODO: Importar las clases
             nested_base = Resource(url, url_base, **params)
@@ -59,7 +59,7 @@ def _load_nested_urls(url_params, url_base):
                     urls += nested_urls
                 else:
                     remaining_urls[base] = nested_urls
-        for base, nested_urls in remaining_urls.items():
+        for base, nested_urls in list(remaining_urls.items()):
             urls += nested_urls
     else:
         # No priority, no order

@@ -29,7 +29,7 @@ class DebugConfigAspect(LoggingAspect):
     def after(self, handler_obj, *args, **kwargs):
         print('DebugConfigAspect')
         for resource in handler_obj.config.urls:
-            print('URL:', resource)
+            print(('URL:', resource))
         #self.logger.info('Before of function: %s, Args: %s, KWArgs: %s' % (
                 #self.function.__name__,
                 #args,

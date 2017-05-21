@@ -63,7 +63,7 @@ class FileSystemSession(SessionBase):
         if not sid:
             self._data.update({
                 'sid': session_id,
-                'cookie': { k:v for k,v in cookie['sid'].items() }
+                'cookie': { k:v for k,v in list(cookie['sid'].items()) }
             })
 
         os.chmod(session_file, 0o660)

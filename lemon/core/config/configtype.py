@@ -34,7 +34,7 @@ class ConfigType(type):
             if '_config_options' in base.__dict__:
                 config_attrs.update(base.__dict__['_config_options'])
             # Recuperamos los atributos.
-            for key, value in base.__dict__.items():
+            for key, value in list(base.__dict__.items()):
                 if not key.startswith('_'):
                     config_attrs[key] = value
         
@@ -43,7 +43,7 @@ class ConfigType(type):
         # a ``config_attrs`` para conseguir la lista completa de opciones de
         # configuración.
         new_classdict = {}
-        for key, value in classdict.items():
+        for key, value in list(classdict.items()):
             if not key.startswith('_'):
                 config_attrs[key] = value
             else:
@@ -97,7 +97,7 @@ class ConfigType(type):
         from lemon.core.handlers.handlerbase import Handler
         from lemon.core.config.urls.resource import Resource
         
-        for aspect_type, aspect_list in aspects_config.items():
+        for aspect_type, aspect_list in list(aspects_config.items()):
             imported_aspect_list = []
             # Preparamos la lista de aspectos (se aplican en orden inverso)
             aspect_list = list(aspect_list)

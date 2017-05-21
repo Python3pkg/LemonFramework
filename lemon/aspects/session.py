@@ -25,6 +25,7 @@ from lemon.core.utils.decorators import cached_property
 
 
 from lemon.core.sessions.filesystem import FileSystemSession
+import collections
 
 __all__ = ['SessionAspect', 'FileSystemSession']
 
@@ -50,7 +51,7 @@ class SessionAspect(Aspect):
                     except ImportError as error:
                         raise InvalidSessionSettingsException(error)
 
-                if callable(expires):
+                if isinstance(expires, collections.Callable):
                     expires_func = expires
                 else:
                     raise InvalidSessionSettingsException(

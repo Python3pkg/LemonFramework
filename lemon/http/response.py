@@ -126,12 +126,12 @@ class HttpResponse(HttpResponseException, metaclass=abc.ABCMeta):
     def headers(self):
         response_headers = [
             (key, value)
-            for key, value in self._headers.values()
+            for key, value in list(self._headers.values())
         ]
 
         response_headers += [
             ('Set-Cookie', morsel.output(header='').strip())
-            for morsel in self._cookies.values()
+            for morsel in list(self._cookies.values())
         ]
 
         return response_headers
